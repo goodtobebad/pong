@@ -63,7 +63,7 @@ void drawPaddle(SDL_Rect* paddle) {
 
 void showScore(int* firstPlayer_score, int* secondPlayer_score) {
   TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24);
-  SDL_Color White = {255, 255, 255};
+  SDL_Color White = {255, 255, 255, 0};
   SDL_Surface* surfaceMessage =
     TTF_RenderText_Solid(Sans, "0 | 0", White);
 
