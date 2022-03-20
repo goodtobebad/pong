@@ -22,12 +22,12 @@ void moveFirstPlayerPaddle(SDL_Event* e, SDL_Rect* paddle) {
   int move_unit = 8;
   if(e -> type == SDL_KEYDOWN) {
     switch(e -> key.keysym.sym) {
-      case SDLK_UP:
+      case SDLK_z:
         if(paddle -> y >= 0) {
           paddle -> y -= move_unit;
         }
         break;
-      case SDLK_DOWN:
+      case SDLK_s:
         if(paddle -> y <= SCREEN_H - PADDLE_H) {
           paddle -> y += move_unit;
         }
