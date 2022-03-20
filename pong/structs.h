@@ -1,5 +1,6 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
+
 typedef struct {
   int x;
   int y;
@@ -7,4 +8,5 @@ typedef struct {
   int dx;
   int dy;
 } Ball;
+
 #endif

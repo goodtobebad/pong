@@ -1,11 +1,13 @@
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 #include "structs.h"
+
 #define SCREEN_W 600
 #define SCREEN_H 400
 
 #define PADDLE_W (SCREEN_W / 25)
 #define PADDLE_H (SCREEN_H / 3)
+
 void resetBall(Ball* ball) {
   ball -> radius = 9;
   ball -> y = SCREEN_H / 2;
@@ -15,18 +17,26 @@ void resetBall(Ball* ball) {
     ball -> dy = (rand() % 6) - 3;
   } while(ball -> dy == 0);
 }
-void moveAIPaddle(SDL_Rect* paddle, Ball* ball) {
-  int move_unit = 2;
-  if(ball -> y > (paddle -> y) + (PADDLE_H / 2) 
-      && paddle -> y <= SCREEN_H - PADDLE_H) {
-    paddle -> y += move_unit;
-  }
-  else if(ball -> y < (paddle -> y) + (PADDLE_H / 2) 
-      && paddle -> y >= 0) {
-    paddle -> y -= move_unit;
+
+void moveFirstPlayerPaddle(SDL_Event* e, SDL_Rect* paddle) {
+  int move_unit = 8;
+  if(e -> type == SDL_KEYDOWN) {
+    switch(e -> key.keysym.sym) {
+      case SDLK_UP:
+        if(paddle -> y >= 0) {
+          paddle -> y -= move_unit;
+        }
+        break;
+      case SDLK_DOWN:
+        if(paddle -> y <= SCREEN_H - PADDLE_H) {
+          paddle -> y += move_unit;
+        }
+        break;
+    }
   }
 }
-void movePaddle(SDL_Event* e, SDL_Rect* paddle) {
+
+void moveSecondPlayerPaddle(SDL_Event* e, SDL_Rect* paddle) {
   int move_unit = 8;
   if(e -> type == SDL_KEYDOWN) {
     switch(e -> key.keysym.sym) {
@@ -85,4 +95,3 @@ bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2) {
     return false;
   }
 }
-

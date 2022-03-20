@@ -15,6 +15,7 @@
 
 #define PADDLE_W (SCREEN_W / 25)
 #define PADDLE_H (SCREEN_H / 3)
+
 int main() {
   const int gameTick = 128;
   const int waittime = 1000.0f/gameTick;
@@ -23,26 +24,19 @@ int main() {
   const int renderFPS = 1000.0f/60;
   int framestarttime = 0;
 
-
   //Create Game Objects
-  SDL_Rect paddle1 = 
-  {10, (SCREEN_H / 2) - (PADDLE_H / 2), PADDLE_W, PADDLE_H}; 
+  SDL_Rect paddle1 = {10, (SCREEN_H / 2) - (PADDLE_H / 2), PADDLE_W, PADDLE_H}; 
  
-  SDL_Rect paddle2 =
-  {SCREEN_W - PADDLE_W - 10,
-    (SCREEN_H / 2) - (PADDLE_H / 2), PADDLE_W, PADDLE_H};
+  SDL_Rect paddle2 = {SCREEN_W - PADDLE_W - 10, (SCREEN_H / 2) - (PADDLE_H / 2), PADDLE_W, PADDLE_H};
 
   srand(time(0));
   Ball ball;
   resetBall(&ball);
 
-
-
   initVideo();
   bool quit = false;
   bool paused = true;
   bool out_of_bounds = false;
-  bool reset = false;
 
   SDL_Event e;
   drawPaddle(&paddle2);
@@ -57,7 +51,6 @@ int main() {
       int limit = 10;
       while((next_game_step <= now) && (limit--)) {
         if(!paused) {
-          moveAIPaddle(&paddle2, &ball);
           out_of_bounds = moveBall(&ball, &paddle1, &paddle2);
         }
         while(SDL_PollEvent(&e) != 0) {
@@ -69,7 +62,8 @@ int main() {
               paused = !paused;
             }
             else if(!paused) {
-              movePaddle(&e, &paddle1);
+              moveFirstPlayerPaddle(&e, &paddle1);
+              moveSecondPlayerPaddle(&e, &paddle2);
             }
           }
         }

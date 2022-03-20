@@ -1,12 +1,12 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = main.c
+OBJS = main.c display.c move.c
 
 #CC specifies which compiler we're using
 CC = gcc
 
 #COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
-COMPILER_FLAGS = `sdl2-config --libs --cflags` -ggdb3 -O0 -std=c99 -Wall -lSDL2_image -lm 
+COMPILER_FLAGS = `sdl2-config --libs --cflags` -O0 -std=c17 -Wall -Wextra -Werror -lSDL2_image -lm 
 
 #LINKER_FLAGS specifies the libraries we're linking against
 LINKER_FLAGS = -lSDL2 -lSDL2_ttf
