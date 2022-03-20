@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2_TTF/SDL_TTF.h>
 #include <stdbool.h>
 #include "structs.h"
 
