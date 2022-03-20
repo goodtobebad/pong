@@ -54,7 +54,7 @@ void moveSecondPlayerPaddle(SDL_Event* e, SDL_Rect* paddle) {
   }
 }
 
-bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2) {
+bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, int* firstPlayer_score, int* secondPlayer_score) {
   if(ball -> x >= SCREEN_W ) {
     ball -> dx = - ball -> dx;
   }
