@@ -55,39 +55,33 @@ void moveSecondPlayerPaddle(SDL_Event* e, SDL_Rect* paddle) {
 }
 
 bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2) {
-  if(ball -> x >= SCREEN_W ) {
-    ball -> dx = - ball -> dx;
-  }
-
   //Right Paddle Hit
-  if(ball -> x <= (paddle1 -> x) + PADDLE_W + 3
-      && ball -> x >= paddle1 -> x
-      && ball -> y <= paddle1 -> y + PADDLE_H 
-      && ball -> y >= paddle1 -> y) {
+  if(ball -> x <= (paddle2 -> x) + PADDLE_W + 3
+      && ball -> x >= paddle2 -> x
+      && ball -> y <= paddle2 -> y + PADDLE_H 
+      && ball -> y >= paddle2 -> y) {
 
       ball -> dx = - ball -> dx;
+      ball -> dy = - ball -> dy;
   }
-  if(ball -> y <= (paddle1 -> y) + PADDLE_H + 3
-      && ball -> y >= paddle1 -> y
-      && ball -> x <= paddle1 -> x + PADDLE_W) {
 
-    ball -> dy = - ball -> dy;
-  }
   if(ball -> y >= SCREEN_H || ball -> y < 0) {
     ball -> dy = - ball -> dy;
   }
 
   //Left Paddle Hit
-  if(ball -> x <= paddle2 -> x + PADDLE_W 
-      && ball -> x >= paddle2 -> x) {
+  if(ball -> x <= paddle1 -> x + PADDLE_W + 3
+      && ball -> x >= paddle1 -> x
+      && ball -> y <= paddle1 -> y + PADDLE_H 
+      && ball -> y >= paddle1 -> y) {
 
     ball -> dx = - ball -> dx;
+    ball -> dy = - ball -> dy;
   }
-
-
 
   ball -> x += ball -> dx;
   ball -> y += ball -> dy;
+
   if(ball -> x <= 0 || ball -> x >= SCREEN_W) {
     return true;
   }
