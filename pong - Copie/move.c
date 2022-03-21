@@ -84,13 +84,6 @@ bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2) {
     ball -> dx = - ball -> dx;
   }
 
-  if(ball -> y <= (paddle1 -> y) + PADDLE_H + 3
-      && ball -> y >= paddle1 -> y
-      && ball -> x <= paddle1 -> x + PADDLE_W) {
-
-    ball -> dy = - ball -> dy;
-  }
-
   ball -> x += ball -> dx;
   ball -> y += ball -> dy;
 
