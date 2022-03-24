@@ -55,10 +55,7 @@ void moveSecondPlayerPaddle(SDL_Event* e, SDL_Rect* paddle) {
   }
 }
 
-bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, bool playerOne_scored, bool playerTwo_scored) {
-  playerOne_scored = false;
-  playerTwo_scored = false;
-  
+bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, int* playerOne_scored, int* playerTwo_scored) {
   //Right Paddle Hit
   if(ball -> x <= (paddle1 -> x) + PADDLE_W + 3
       && ball -> x >= paddle1 -> x
@@ -94,9 +91,9 @@ bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, bool playerOne_s
   if(ball -> x <= 0 || ball -> x >= SCREEN_W) {
 
     if(ball -> x <= 0) {
-      playerOne_scored = true;
+      playerOne_scored = 1;
     }else {
-      playerTwo_scored = true;
+      playerTwo_scored = 1;
     }
 
     return true;

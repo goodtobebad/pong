@@ -20,8 +20,8 @@ int main() {
   const int gameTick = 128;
   const int waittime = 1000.0f/gameTick;
   int next_game_step = SDL_GetTicks(); //initial value
-  bool playerOne_scored = false;
-  bool playerTwo_scored = false;
+  int playerOne_scored = 0;
+  int playerTwo_scored = 0;
   int score_playerOne = 0;
   int score_playerTwo = 0;
  
@@ -55,7 +55,7 @@ int main() {
       int limit = 10;
       while((next_game_step <= now) && (limit--)) {
         if(!paused) {
-          out_of_bounds = moveBall(&ball, &paddle1, &paddle2, playerOne_scored, playerTwo_scored);
+          out_of_bounds = moveBall(&ball, &paddle1, &paddle2, &playerOne_scored, &playerTwo_scored);
         }
         while(SDL_PollEvent(&e) != 0) {
           if(e.type == SDL_QUIT) {
@@ -91,16 +91,16 @@ int main() {
     if(out_of_bounds) {
       paused = true;
 
-      if(playerOne_scored) {
+      if(playerOne_scored == 1) {
         score_playerOne += 1;
       }
 
-      if(playerTwo_scored) {
+      if(playerTwo_scored == 1) {
         score_playerTwo += 1;
       }
 
-      playerOne_scored = false;
-      playerTwo_scored = false;
+      playerOne_scored = 0;
+      playerTwo_scored = 0;
 
       resetBall(&ball);
     }
