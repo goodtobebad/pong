@@ -19,7 +19,7 @@ void resetBall(Ball* ball) {
 }
 
 void moveFirstPlayerBar(SDL_Event* e, SDL_Rect* bar) {
-  int move_unit = 3;
+  int move_unit = 13;
   if(e -> type == SDL_KEYDOWN) {
     switch(e -> key.keysym.sym) {
       case SDLK_z:
@@ -37,7 +37,7 @@ void moveFirstPlayerBar(SDL_Event* e, SDL_Rect* bar) {
 }
 
 void moveSecondPlayerBar(SDL_Event* e, SDL_Rect* bar) {
-  int move_unit = 3;
+  int move_unit = 13;
   if(e -> type == SDL_KEYDOWN) {
     switch(e -> key.keysym.sym) {
       case SDLK_UP:
