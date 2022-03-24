@@ -14,25 +14,25 @@
 #define SCREEN_W 600
 #define SCREEN_H 400
 
-#define PADDLE_W (SCREEN_W / 25)
-#define PADDLE_H (SCREEN_H / 3)
+#define BAR_W (SCREEN_W / 25)
+#define BAR_H (SCREEN_H / 3)
 
 int main() {
   const int gameTick = 128;
-  const int waittime = 1000.0f/gameTick;
-  int next_game_step = SDL_GetTicks(); //initial value
+  const int waitTime = 1000.0f/gameTick;
+  int next_game_step = SDL_GetTicks();
   int playerOne_scored = 0;
   int playerTwo_scored = 0;
   int score_playerOne = 0;
   int score_playerTwo = 0;
  
   const int renderFPS = 1000.0f/60;
-  int framestarttime = 0;
+  int frameStartTime = 0;
 
   //Create Game Objects
-  SDL_Rect paddle1 = {10, (SCREEN_H / 2) - (PADDLE_H / 2), PADDLE_W, PADDLE_H}; 
+  SDL_Rect bar1 = {10, (SCREEN_H / 2) - (BAR_H / 2), BAR_W, BAR_H}; 
  
-  SDL_Rect paddle2 = {SCREEN_W - PADDLE_W - 10, (SCREEN_H / 2) - (PADDLE_H / 2), PADDLE_W, PADDLE_H};
+  SDL_Rect bar2 = {SCREEN_W - BAR_W - 10, (SCREEN_H / 2) - (BAR_H / 2), BAR_W, BAR_H};
 
   srand(time(0));
   Ball ball;
@@ -41,22 +41,22 @@ int main() {
   initVideo();
   bool quit = false;
   bool paused = true;
-  bool out_of_bounds = false;
+  bool ball_out = false;
 
   SDL_Event e;
-  drawPaddle(&paddle2);
-  drawPaddle(&paddle1);
+  drawBar(&bar2);
+  drawBar(&bar1);
   drawBall(&ball);
   updateScreen();
-  //Game Loop
+
   while(!quit) {
     int now = SDL_GetTicks();
-    //Game logic
+
     if(next_game_step <= now) {
       int limit = 10;
       while((next_game_step <= now) && (limit--)) {
         if(!paused) {
-          out_of_bounds = moveBall(&ball, &paddle1, &paddle2, &playerOne_scored, &playerTwo_scored);
+          ball_out = moveBall(&ball, &bar1, &bar2, &playerOne_scored, &playerTwo_scored);
         }
         while(SDL_PollEvent(&e) != 0) {
           if(e.type == SDL_QUIT) {
@@ -67,29 +67,29 @@ int main() {
               paused = !paused;
             }
             else if(!paused) {
-              moveFirstPlayerPaddle(&e, &paddle1);
-              moveSecondPlayerPaddle(&e, &paddle2);
+              moveFirstPlayerBar(&e, &bar1);
+              moveSecondPlayerBar(&e, &bar2);
             }
           }
         }
-        next_game_step += waittime;
+        next_game_step += waitTime;
       }
+
       if(!paused) {
-        //Rendering
-        drawPaddle(&paddle2);
-        drawPaddle(&paddle1);
+        drawBar(&bar2);
+        drawBar(&bar1);
         drawBall(&ball);
         updateScreen();
       }
     }
-    //limit fps
-    int delaytime = renderFPS - (SDL_GetTicks() - framestarttime);
-    if(delaytime > 0) {
-      SDL_Delay(delaytime);
-    }
-    framestarttime = SDL_GetTicks();
 
-    if(out_of_bounds) {
+    int delayTime = renderFPS - (SDL_GetTicks() - frameStartTime);
+    if(delayTime > 0) {
+      SDL_Delay(delayTime);
+    }
+    frameStartTime = SDL_GetTicks();
+
+    if(ball_out) {
       paused = true;
 
       if(playerOne_scored == 1) {
@@ -103,10 +103,7 @@ int main() {
       if(score_playerOne >= 3) {
         SDL_Delay(1000);
 
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-        "Win",
-        "Player one wins",
-        NULL);
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Win", "Player one wins", NULL);
 
         killDisplay();
       }
@@ -114,16 +111,16 @@ int main() {
       if(score_playerTwo >= 3) {
         SDL_Delay(1000);
 
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-        "Win",
-        "Player two wins",
-        NULL);
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Win", "Player two wins", NULL);
 
         killDisplay();
       }
 
       playerOne_scored = 0;
       playerTwo_scored = 0;
+
+      score_playerOne = 0;
+      score_playerTwo = 0;
 
       resetBall(&ball);
     }

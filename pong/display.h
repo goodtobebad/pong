@@ -6,6 +6,6 @@
   bool initVideo();
   void killDisplay();
   void updateScreen();
-  void drawPaddle(SDL_Rect* paddle);
+  void drawBar(SDL_Rect* bar);
   void drawBall(Ball* ball);
 #endif

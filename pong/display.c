@@ -55,9 +55,9 @@ void killDisplay() {
   SDL_Quit();
 }
 
-void drawPaddle(SDL_Rect* paddle) {
+void drawBar(SDL_Rect* bar) {
   SDL_SetRenderDrawColor(gRenderer, 102, 255, 102, 0xFF);
-  SDL_RenderFillRect(gRenderer, paddle);
+  SDL_RenderFillRect(gRenderer, bar);
 }
 
 void drawBall(Ball* ball) {
