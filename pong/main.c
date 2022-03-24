@@ -119,9 +119,6 @@ int main() {
       playerOne_scored = 0;
       playerTwo_scored = 0;
 
-      score_playerOne = 0;
-      score_playerTwo = 0;
-
       resetBall(&ball);
     }
 
