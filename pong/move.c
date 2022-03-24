@@ -1,5 +1,5 @@
 #include <SDL2/SDL.h>
-#include <SDL2/SDL.ttf.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdbool.h>
 #include "structs.h"
 
@@ -96,12 +96,36 @@ bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, int* score_playe
       score_playerOne += 1;
     }
 
-    SDL_Delay(1000);
+    if(score_playerOne < 3 && score_playerTwo < 3) {
+      SDL_Delay(1000);
 
-    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-    "Game Over",
-    "Player 1 Win",
-    NULL);
+      SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+      "Score",
+      "Player 1 :" + score_playerOne + " | Player 2 :" + score_playerTwo,
+      NULL);
+      
+      break;
+    }else {
+      if(score_playerOne >= 3) {
+        SDL_Delay(1000);
+
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+        "Partie",
+        "Player one wins",
+        NULL);
+
+        break;
+      }else {
+        SDL_Delay(1000);
+
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+        "Partie",
+        "Player two wins",
+        NULL);
+
+        break;
+      }
+    }
 
     return true;
   }
