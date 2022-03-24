@@ -23,7 +23,7 @@ int main() {
   bool playerOne_scored = false;
   bool playerTwo_scored = false;
   int score_playerOne = 0;
-  int score_playedTwo = 0;
+  int score_playerTwo = 0;
  
   const int renderFPS = 1000.0f/60;
   int framestarttime = 0;
@@ -92,7 +92,7 @@ int main() {
       paused = true;
 
       if(playerOne_scored) {
-        score_playedOne += 1;
+        score_playerOne += 1;
       }
 
       if(playerTwo_scored) {
