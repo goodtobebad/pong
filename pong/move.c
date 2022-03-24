@@ -91,9 +91,9 @@ bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, int *playerOne_s
   if(ball -> x <= 0 || ball -> x >= SCREEN_W) {
 
     if(ball -> x <= 0) {
-      playerOne_scored = 1;
+      *playerOne_scored = 1;
     }else {
-      playerTwo_scored = 1;
+      *playerTwo_scored = 1;
     }
 
     return true;
