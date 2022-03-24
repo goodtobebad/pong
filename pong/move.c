@@ -41,13 +41,13 @@ void moveSecondPlayerBar(SDL_Event* e, SDL_Rect* bar) {
   if(e -> type == SDL_KEYDOWN) {
     switch(e -> key.keysym.sym) {
       case SDLK_UP:
-        if(paddle -> y >= 0) {
-          paddle -> y -= move_unit;
+        if(bar -> y >= 0) {
+          bar -> y -= move_unit;
         }
         break;
       case SDLK_DOWN:
-        if(paddle -> y <= SCREEN_H - PADDLE_H) {
-          paddle -> y += move_unit;
+        if(bar -> y <= SCREEN_H - BAR_H) {
+          bar -> y += move_unit;
         }
         break;
     }
