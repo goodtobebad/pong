@@ -56,7 +56,7 @@ void killDisplay() {
 }
 
 void drawBar(SDL_Rect* bar) {
-  SDL_SetRenderDrawColor(gRenderer, 102, 255, 102, 0xFF);
+  SDL_SetRenderDrawColor(gRenderer, 3, 138, 255, 0xFF);
   SDL_RenderFillRect(gRenderer, bar);
 }
 
@@ -65,7 +65,7 @@ void drawBall(Ball* ball) {
   int y0 = ball -> y;
   int r = ball -> radius;
   
-  SDL_SetRenderDrawColor(gRenderer, 37, 41, 88, 0xFF);
+  SDL_SetRenderDrawColor(gRenderer, 3, 138, 255, 0xFF);
   int x = r - 1;
   int y = 0;
   int dx = 1;
