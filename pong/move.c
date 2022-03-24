@@ -56,6 +56,9 @@ void moveSecondPlayerPaddle(SDL_Event* e, SDL_Rect* paddle) {
 }
 
 bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, int* score_playerOne, int* score_playerTwo) {
+  char scoreOne[20];
+  char scoreTwo[20];
+
   //Right Paddle Hit
   if(ball -> x <= (paddle1 -> x) + PADDLE_W + 3
       && ball -> x >= paddle1 -> x
@@ -92,21 +95,22 @@ bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, int* score_playe
 
     if(ball -> x <= 0) {
       score_playerTwo += 1;
+      itoa(*score_playerTwo, scoreTwo, 10);
     }else {
       score_playerOne += 1;
+      itoa(*score_playerOne, scoreOne, 10);
     }
 
-    if(score_playerOne < 3 && score_playerTwo < 3) {
+    if(*score_playerOne < 3 && *score_playerTwo < 3) {
       SDL_Delay(1000);
 
       SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
       "Score",
-      "Player 1 :" + score_playerOne + " | Player 2 :" + score_playerTwo,
+      "Player 1 :" + scoreOne + " | Player 2 :" + scoreTwo,
       NULL);
       
-      break;
     }else {
-      if(score_playerOne >= 3) {
+      if(*score_playerOne >= 3) {
         SDL_Delay(1000);
 
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
@@ -114,7 +118,6 @@ bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, int* score_playe
         "Player one wins",
         NULL);
 
-        break;
       }else {
         SDL_Delay(1000);
 
@@ -123,7 +126,6 @@ bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, int* score_playe
         "Player two wins",
         NULL);
 
-        break;
       }
     }
 
