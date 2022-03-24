@@ -107,6 +107,8 @@ int main() {
         "Win",
         "Player one wins",
         NULL);
+
+        killDisplay();
       }
 
       if(score_playerTwo >= 3) {
@@ -116,6 +118,8 @@ int main() {
         "Win",
         "Player two wins",
         NULL);
+
+        killDisplay();
       }
 
       playerOne_scored = 0;
