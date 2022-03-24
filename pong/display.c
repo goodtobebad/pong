@@ -1,5 +1,4 @@
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 #include <stdbool.h>
 #include "structs.h"
 
@@ -59,27 +58,6 @@ void killDisplay() {
 void drawPaddle(SDL_Rect* paddle) {
   SDL_SetRenderDrawColor(gRenderer, 102, 255, 102, 0xFF);
   SDL_RenderFillRect(gRenderer, paddle);
-}
-
-void showScore(int* firstPlayer_score, int* secondPlayer_score) {
-  TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24);
-  SDL_Color White = {255, 255, 255, 0};
-  SDL_Surface* surfaceMessage =
-    TTF_RenderText_Solid(Sans, "0 | 0", White);
-
-  SDL_SetRenderDrawColor(gRenderer, 102, 255, 102, 0xFF);
-  SDL_Texture* Message = SDL_CreateTextureFromSurface(gRenderer, surfaceMessage);
-
-  SDL_Rect Message_rect;
-  Message_rect.x = SCREEN_WIDTH / 2;
-  Message_rect.y = SCREEN_HEIGHT;
-  Message_rect.w = SCREEN_WIDTH / 3;
-  Message_rect.h = SCREEN_HEIGHT / 25;
-
-  SDL_RenderCopy(gRenderer, Message, NULL, &Message_rect);
-
-  SDL_FreeSurface(surfaceMessage);
-  SDL_DestroyTexture(Message);
 }
 
 void drawBall(Ball* ball) {

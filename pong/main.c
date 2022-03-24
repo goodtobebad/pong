@@ -20,8 +20,6 @@ int main() {
   const int gameTick = 128;
   const int waittime = 1000.0f/gameTick;
   int next_game_step = SDL_GetTicks(); //initial value
-  int firstPlayer_score = 0;
-  int secondPlayer_score = 0;
  
   const int renderFPS = 1000.0f/60;
   int framestarttime = 0;
@@ -41,7 +39,6 @@ int main() {
   bool out_of_bounds = false;
 
   SDL_Event e;
-  showScore(&firstPlayer_score, &secondPlayer_score);
   drawPaddle(&paddle2);
   drawPaddle(&paddle1);
   drawBall(&ball);
@@ -54,7 +51,7 @@ int main() {
       int limit = 10;
       while((next_game_step <= now) && (limit--)) {
         if(!paused) {
-          out_of_bounds = moveBall(&ball, &paddle1, &paddle2, &firstPlayer_score, &secondPlayer_score);
+          out_of_bounds = moveBall(&ball, &paddle1, &paddle2);
         }
         while(SDL_PollEvent(&e) != 0) {
           if(e.type == SDL_QUIT) {
@@ -74,7 +71,6 @@ int main() {
       }
       if(!paused) {
         //Rendering
-        showScore(&firstPlayer_score, &secondPlayer_score);
         drawPaddle(&paddle2);
         drawPaddle(&paddle1);
         drawBall(&ball);

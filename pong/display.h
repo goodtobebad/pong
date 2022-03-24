@@ -7,6 +7,5 @@
   void killDisplay();
   void updateScreen();
   void drawPaddle(SDL_Rect* paddle);
-  void showScore(int* firstPlayer_score, int* secondPlayer_score);
   void drawBall(Ball* ball);
 #endif
