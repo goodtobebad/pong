@@ -3,6 +3,7 @@
 #include "move.h"
 #include <time.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -97,6 +98,24 @@ int main() {
 
       if(playerTwo_scored == 1) {
         score_playerTwo += 1;
+      }
+
+      if(score_playerOne >= 3) {
+        SDL_Delay(1000);
+
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+        "Win",
+        "Player one wins",
+        NULL);
+      }
+
+      if(score_playerTwo >= 3) {
+        SDL_Delay(1000);
+
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+        "Win",
+        "Player two wins",
+        NULL);
       }
 
       playerOne_scored = 0;
