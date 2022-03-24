@@ -100,14 +100,16 @@ bool moveBall(Ball* ball, SDL_Rect* paddle1, SDL_Rect* paddle2, int* score_playe
       SDL_Delay(1000);
 
       SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-      "Partie",
+      "Win",
       "Player one wins",
       NULL);
-    }else {
+    }
+
+    if(*score_playerTwo >= 3) {
       SDL_Delay(1000);
 
       SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-      "Partie",
+      "Win",
       "Player two wins",
       NULL);
     }
